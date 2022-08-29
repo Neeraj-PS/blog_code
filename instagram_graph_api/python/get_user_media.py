@@ -1,6 +1,6 @@
 from defines import getCreds, makeApiCall
 
-def getUserMedia( params, pagingUrl = '' ) :
+def getUserMedia( params, pagingUrl = '' ):
 	""" Get users media
 	
 	API Endpoint:
@@ -11,13 +11,14 @@ def getUserMedia( params, pagingUrl = '' ) :
 
 	"""
 
-	endpointParams = dict() # parameter to send to the endpoint
-	endpointParams['fields'] = 'id,caption,media_type,media_url,permalink,thumbnail_url,timestamp,username' # fields to get back
-	endpointParams['access_token'] = params['access_token'] # access token
+	endpointParams = {
+		'fields': 'id,caption,media_type,media_url,permalink,thumbnail_url,timestamp,username',
+		'access_token': params['access_token'],
+	}
 
-	if ( '' == pagingUrl ) : # get first page
+	if pagingUrl == '': # get first page
 		url = params['endpoint_base'] + params['instagram_account_id'] + '/media' # endpoint url
-	else : # get specific page
+	else: # get specific page
 		url = pagingUrl  # endpoint url
 
 	return makeApiCall( url, endpointParams, params['debug'] ) # make the api call

@@ -1,7 +1,7 @@
 import requests
 import json
 
-def getCreds() :
+def getCreds():
 	""" Get creds required for use in the applications
 	
 	Returns:
@@ -9,12 +9,14 @@ def getCreds() :
 
 	"""
 
-	creds = dict() # dictionary to hold everything
-	creds['access_token'] = 'ACCESS-TOKEN' # access token for use with all api calls
-	creds['client_id'] = 'FB-APP-CLIENT-ID' # client id from facebook app IG Graph API Test
-	creds['client_secret'] = 'FB-APP-CLIENT-SECRET' # client secret from facebook app
-	creds['graph_domain'] = 'https://graph.facebook.com/' # base domain for api calls
-	creds['graph_version'] = 'v6.0' # version of the api we are hitting
+	creds = {
+		'access_token': 'ACCESS-TOKEN',
+		'client_id': 'FB-APP-CLIENT-ID',
+		'client_secret': 'FB-APP-CLIENT-SECRET',
+		'graph_domain': 'https://graph.facebook.com/',
+		'graph_version': 'v6.0',
+	}
+
 	creds['endpoint_base'] = creds['graph_domain'] + creds['graph_version'] + '/' # base endpoint with domain and version
 	creds['debug'] = 'no' # debug mode for api call
 	creds['page_id'] = 'FB-PAGE-ID' # users page id
@@ -23,7 +25,7 @@ def getCreds() :
 
 	return creds
 
-def makeApiCall( url, endpointParams, debug = 'no' ) :
+def makeApiCall( url, endpointParams, debug = 'no' ):
 	""" Request data from endpoint with params
 	
 	Args:
@@ -38,14 +40,16 @@ def makeApiCall( url, endpointParams, debug = 'no' ) :
 
 	data = requests.get( url, endpointParams ) # make get request
 
-	response = dict() # hold response info
-	response['url'] = url # url we are hitting
-	response['endpoint_params'] = endpointParams #parameters for the endpoint
-	response['endpoint_params_pretty'] = json.dumps( endpointParams, indent = 4 ) # pretty print for cli
+	response = {
+		'url': url,
+		'endpoint_params': endpointParams,
+		'endpoint_params_pretty': json.dumps(endpointParams, indent=4),
+	}
+
 	response['json_data'] = json.loads( data.content ) # response data from the api
 	response['json_data_pretty'] = json.dumps( response['json_data'], indent = 4 ) # pretty print for cli
 
-	if ( 'yes' == debug ) : # display out response info
+	if debug == 'yes': # display out response info
 		displayApiCallData( response ) # display response
 
 	return response # get and return content

@@ -1,6 +1,6 @@
 from defines import getCreds, makeApiCall
 
-def getLongLivedAccessToken( params ) :
+def getLongLivedAccessToken( params ):
 	""" Get long lived access token
 	
 	API Endpoint:
@@ -11,11 +11,12 @@ def getLongLivedAccessToken( params ) :
 
 	"""
 
-	endpointParams = dict() # parameter to send to the endpoint
-	endpointParams['grant_type'] = 'fb_exchange_token' # tell facebook we want to exchange token
-	endpointParams['client_id'] = params['client_id'] # client id from facebook app
-	endpointParams['client_secret'] = params['client_secret'] # client secret from facebook app
-	endpointParams['fb_exchange_token'] = params['access_token'] # access token to get exchange for a long lived token
+	endpointParams = {
+		'grant_type': 'fb_exchange_token',
+		'client_id': params['client_id'],
+		'client_secret': params['client_secret'],
+		'fb_exchange_token': params['access_token'],
+	}
 
 	url = params['endpoint_base'] + 'oauth/access_token' # endpoint url
 

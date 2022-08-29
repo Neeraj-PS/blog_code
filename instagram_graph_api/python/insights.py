@@ -1,6 +1,6 @@
 from defines import getCreds, makeApiCall
 
-def getUserMedia( params ) :
+def getUserMedia( params ):
 	""" Get users media
 	
 	API Endpoint:
@@ -11,15 +11,16 @@ def getUserMedia( params ) :
 
 	"""
 
-	endpointParams = dict() # parameter to send to the endpoint
-	endpointParams['fields'] = 'id,caption,media_type,media_url,permalink,thumbnail_url,timestamp,username' # fields to get back
-	endpointParams['access_token'] = params['access_token'] # access token
+	endpointParams = {
+		'fields': 'id,caption,media_type,media_url,permalink,thumbnail_url,timestamp,username',
+		'access_token': params['access_token'],
+	}
 
 	url = params['endpoint_base'] + params['instagram_account_id'] + '/media' # endpoint url
 
 	return makeApiCall( url, endpointParams, params['debug'] ) # make the api call
 
-def getMediaInsights( params ) :
+def getMediaInsights( params ):
 	""" Get insights for a specific media id
 	
 	API Endpoint:
@@ -29,15 +30,16 @@ def getMediaInsights( params ) :
 		object: data from the endpoint
 
 	"""
-	endpointParams = dict() # parameter to send to the endpoint
-	endpointParams['metric'] = params['metric'] # fields to get back
-	endpointParams['access_token'] = params['access_token'] # access token
+	endpointParams = {
+		'metric': params['metric'],
+		'access_token': params['access_token'],
+	}
 
 	url = params['endpoint_base'] + params['latest_media_id'] + '/insights' # endpoint url
 
 	return makeApiCall( url, endpointParams, params['debug'] ) # make the api call
 
-def getUserInsights( params ) :
+def getUserInsights( params ):
 	""" Get insights for a users account
 	
 	API Endpoint:
@@ -48,10 +50,11 @@ def getUserInsights( params ) :
 
 	"""
 
-	endpointParams = dict() # parameter to send to the endpoint
-	endpointParams['metric'] = 'follower_count,impressions,profile_views,reach' # fields to get back
-	endpointParams['period'] = 'day' # period
-	endpointParams['access_token'] = params['access_token'] # access token
+	endpointParams = {
+		'metric': 'follower_count,impressions,profile_views,reach',
+		'period': 'day',
+		'access_token': params['access_token'],
+	}
 
 	url = params['endpoint_base'] + params['instagram_account_id'] + '/insights' # endpoint url
 

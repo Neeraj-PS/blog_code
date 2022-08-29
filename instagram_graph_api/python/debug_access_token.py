@@ -1,7 +1,7 @@
 from defines import getCreds, makeApiCall
 import datetime
 
-def debugAccessToken( params ) :
+def debugAccessToken( params ):
 	""" Get info on an access token 
 	
 	API Endpoint:
@@ -12,9 +12,10 @@ def debugAccessToken( params ) :
 
 	"""
 
-	endpointParams = dict() # parameter to send to the endpoint
-	endpointParams['input_token'] = params['access_token'] # input token is the access token
-	endpointParams['access_token'] = params['access_token'] # access token to get debug info on
+	endpointParams = {
+		'input_token': params['access_token'],
+		'access_token': params['access_token'],
+	}
 
 	url = params['graph_domain'] + '/debug_token' # endpoint url
 
