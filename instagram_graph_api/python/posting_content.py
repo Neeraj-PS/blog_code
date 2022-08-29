@@ -1,7 +1,7 @@
 import time
 from defines_py3 import getCreds, makeApiCall
 
-def createMediaObject( params ) :
+def createMediaObject( params ):
 	""" Create media object
 
 	Args:
@@ -18,19 +18,20 @@ def createMediaObject( params ) :
 
 	url = params['endpoint_base'] + params['instagram_account_id'] + '/media' # endpoint url
 
-	endpointParams = dict() # parameter to send to the endpoint
-	endpointParams['caption'] = params['caption']  # caption for the post
-	endpointParams['access_token'] = params['access_token'] # access token
+	endpointParams = {
+		'caption': params['caption'],
+		'access_token': params['access_token'],
+	}
 
-	if 'IMAGE' == params['media_type'] : # posting image
+	if params['media_type'] == 'IMAGE': # posting image
 		endpointParams['image_url'] = params['media_url']  # url to the asset
-	else : # posting video
+	else: # posting video
 		endpointParams['media_type'] = params['media_type']  # specify media type
 		endpointParams['video_url'] = params['media_url']  # url to the asset
-	
+
 	return makeApiCall( url, endpointParams, 'POST' ) # make the api call
 
-def getMediaObjectStatus( mediaObjectId, params ) :
+def getMediaObjectStatus( mediaObjectId, params ):
 	""" Check the status of a media object
 
 	Args:
@@ -47,13 +48,14 @@ def getMediaObjectStatus( mediaObjectId, params ) :
 
 	url = params['endpoint_base'] + '/' + mediaObjectId # endpoint url
 
-	endpointParams = dict() # parameter to send to the endpoint
-	endpointParams['fields'] = 'status_code' # fields to get back
-	endpointParams['access_token'] = params['access_token'] # access token
+	endpointParams = {
+		'fields': 'status_code',
+		'access_token': params['access_token'],
+	}
 
 	return makeApiCall( url, endpointParams, 'GET' ) # make the api call
 
-def publishMedia( mediaObjectId, params ) :
+def publishMedia( mediaObjectId, params ):
 	""" Publish content
 
 	Args:
@@ -70,13 +72,14 @@ def publishMedia( mediaObjectId, params ) :
 
 	url = params['endpoint_base'] + params['instagram_account_id'] + '/media_publish' # endpoint url
 
-	endpointParams = dict() # parameter to send to the endpoint
-	endpointParams['creation_id'] = mediaObjectId # fields to get back
-	endpointParams['access_token'] = params['access_token'] # access token
+	endpointParams = {
+		'creation_id': mediaObjectId,
+		'access_token': params['access_token'],
+	}
 
 	return makeApiCall( url, endpointParams, 'POST' ) # make the api call
 
-def getContentPublishingLimit( params ) :
+def getContentPublishingLimit( params ):
 	""" Get the api limit for the user
 
 	Args:
@@ -92,9 +95,10 @@ def getContentPublishingLimit( params ) :
 
 	url = params['endpoint_base'] + params['instagram_account_id'] + '/content_publishing_limit' # endpoint url
 
-	endpointParams = dict() # parameter to send to the endpoint
-	endpointParams['fields'] = 'config,quota_usage' # fields to get back
-	endpointParams['access_token'] = params['access_token'] # access token
+	endpointParams = {
+		'fields': 'config,quota_usage',
+		'access_token': params['access_token'],
+	}
 
 	return makeApiCall( url, endpointParams, 'GET' ) # make the api call
 
@@ -102,8 +106,11 @@ params = getCreds() # get creds from defines
 
 params['media_type'] = 'IMAGE' # type of asset
 params['media_url'] = 'https://justinstolpe.com/sandbox/ig_publish_content_img.png' # url on public server for the post
-params['caption'] = 'This image was posted through the Instagram Graph API with a python script I wrote! Go check out the video tutorial on my YouTube channel.'
-params['caption'] += "\n."
+params['caption'] = (
+	'This image was posted through the Instagram Graph API with a python script I wrote! Go check out the video tutorial on my YouTube channel.'
+	+ "\n."
+)
+
 params['caption'] += "\nyoutube.com/justinstolpe"
 params['caption'] += "\n."
 params['caption'] += "\n#instagram #graphapi #instagramgraphapi #code #coding #programming #python #api #webdeveloper #codinglife #developer #coder #tech #developerlife #webdev #youtube #instgramgraphapi" # caption for the post
@@ -134,8 +141,11 @@ print( publishImageResponse['json_data_pretty'] ) # json response from ig api
 
 params['media_type'] = 'VIDEO' # type of asset
 params['media_url'] = 'https://justinstolpe.com/sandbox/ig_publish_content_vid.mp4' # url on public server for the post
-params['caption'] = 'This video was posted through the Instagram Graph API with a python script I wrote! Go check out the video tutorial on my YouTube channel.'
-params['caption'] += "\n."
+params['caption'] = (
+	'This video was posted through the Instagram Graph API with a python script I wrote! Go check out the video tutorial on my YouTube channel.'
+	+ "\n."
+)
+
 params['caption'] += "\nyoutube.com/justinstolpe"
 params['caption'] += "\n."
 params['caption'] += "\n#instagram #graphapi #instagramgraphapi #code #coding #programming #python #api #webdeveloper #codinglife #developer #coder #tech #developerlife #webdev #youtube #instgramgraphapi" # caption for the post

@@ -1,6 +1,6 @@
 from defines import getCreds, makeApiCall
 
-def getInstagramAccount( params ) :
+def getInstagramAccount( params ):
 	""" Get instagram account
 	
 	API Endpoint:
@@ -11,9 +11,10 @@ def getInstagramAccount( params ) :
 
 	"""
 
-	endpointParams = dict() # parameter to send to the endpoint
-	endpointParams['access_token'] = params['access_token'] # tell facebook we want to exchange token
-	endpointParams['fields'] = 'instagram_business_account' # access token
+	endpointParams = {
+		'access_token': params['access_token'],
+		'fields': 'instagram_business_account',
+	}
 
 	url = params['endpoint_base'] + params['page_id'] # endpoint url
 

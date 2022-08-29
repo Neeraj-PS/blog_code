@@ -1,7 +1,7 @@
 from defines import getCreds, makeApiCall
 import sys
 
-def getHashtagInfo( params ) :
+def getHashtagInfo( params ):
 	""" Get info on a hashtag
 	
 	API Endpoint:
@@ -12,17 +12,18 @@ def getHashtagInfo( params ) :
 
 	"""
 
-	endpointParams = dict() # parameter to send to the endpoint
-	endpointParams['user_id'] = params['instagram_account_id'] # user id making request
-	endpointParams['q'] = params['hashtag_name'] # hashtag name
-	endpointParams['fields'] = 'id,name' # fields to get back
-	endpointParams['access_token'] = params['access_token'] # access token
+	endpointParams = {
+		'user_id': params['instagram_account_id'],
+		'q': params['hashtag_name'],
+		'fields': 'id,name',
+		'access_token': params['access_token'],
+	}
 
 	url = params['endpoint_base'] + 'ig_hashtag_search' # endpoint url
 
 	return makeApiCall( url, endpointParams, params['debug'] ) # make the api call
 
-def getHashtagMedia( params ) :
+def getHashtagMedia( params ):
 	""" Get posts for a hashtag
 	
 	API Endpoints:
@@ -34,16 +35,17 @@ def getHashtagMedia( params ) :
 
 	"""
 
-	endpointParams = dict() # parameter to send to the endpoint
-	endpointParams['user_id'] = params['instagram_account_id'] # user id making request
-	endpointParams['fields'] = 'id,children,caption,comment_count,like_count,media_type,media_url,permalink' # fields to get back
-	endpointParams['access_token'] = params['access_token'] # access token
+	endpointParams = {
+		'user_id': params['instagram_account_id'],
+		'fields': 'id,children,caption,comment_count,like_count,media_type,media_url,permalink',
+		'access_token': params['access_token'],
+	}
 
 	url = params['endpoint_base'] + params['hashtag_id'] + '/' + params['type'] # endpoint url
 
 	return makeApiCall( url, endpointParams, params['debug'] ) # make the api call
 
-def getRecentlySearchedHashtags( params ) :
+def getRecentlySearchedHashtags( params ):
 	""" Get hashtags a user has recently search for
 	
 	API Endpoints:
@@ -54,10 +56,7 @@ def getRecentlySearchedHashtags( params ) :
 
 	"""
 
-	endpointParams = dict() # parameter to send to the endpoint
-	endpointParams['fields'] = 'id,name' # fields to get back
-	endpointParams['access_token'] = params['access_token'] # access token
-
+	endpointParams = {'fields': 'id,name', 'access_token': params['access_token']}
 	url = params['endpoint_base'] + params['instagram_account_id'] + '/' + 'recently_searched_hashtags' # endpoint url
 
 	return makeApiCall( url, endpointParams, params['debug'] ) # make the api call
